@@ -23,7 +23,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	int currentState = MENU;
 	Font titleFont;
 	Font normalFont;
-	
+	Wizard wizard = new Wizard(225, 700, 50, 50);
+	ObjectManager objectManager = new ObjectManager(wizard);
+	Timer alienSpawn;
+	void startGame() {
+		 //alienSpawn = new Timer(1000 , objectManager);
+		// alienSpawn.start();
+	}
 	public GamePanel() {
 		frameDraw = new Timer(1000/60,this);
 	    frameDraw.start();
@@ -46,7 +52,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, Halloween.width, Halloween.height);
-		
+		objectManager.draw(g);
 		
 	}
 	void drawEndState(Graphics g)  {  
@@ -76,17 +82,24 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
+
+		    
 		if (e.getKeyCode()==KeyEvent.VK_ENTER) {
 		    if (currentState == END) {
 		        currentState = MENU;
-		    } else {
+		        alienSpawn.stop();
+		      
+		    } 
+		    if (currentState == MENU){
 		        currentState++;
+		        wizard = new Wizard(250, 700, 50,50);
+		    	objectManager = new ObjectManager(wizard);
 		    }
-		}  
-		if (e.getKeyCode()==KeyEvent.VK_UP) {
-		    System.out.println("UP");
+		    if(currentState == GAME) {
+		    	startGame();
+		    }
 		}
-	}
+	}    
 
 	@Override
 	public void keyReleased(KeyEvent e) {
