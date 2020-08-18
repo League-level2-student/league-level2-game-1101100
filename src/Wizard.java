@@ -25,7 +25,7 @@ public class Wizard extends GameObject{
 	}
 	void draw(Graphics g) {
 		g.setColor(Color.RED);
-		g.fillRect(100, 100, width, height);
+		g.fillRect(500, 350, width, height);
 	}
 
 }

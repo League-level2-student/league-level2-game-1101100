@@ -15,14 +15,13 @@ public class ObjectManager implements ActionListener {
 		
 		return score;
 	}
-	public ObjectManager(Wizard rocketShip) {
+	public ObjectManager(Wizard wizard) {
 		this.wizard = wizard;
 	}
 	void addAlien() {
 		
 		Random random = new Random();
-		aliens.add(new Alien(random.nextInt(450),0,50,50));
-		
+		aliens.add(new Alien(0, random.nextInt(700),50,50));
 	}
 	void update() {
 		

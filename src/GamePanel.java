@@ -27,8 +27,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	ObjectManager objectManager = new ObjectManager(wizard);
 	Timer alienSpawn;
 	void startGame() {
-		 //alienSpawn = new Timer(1000 , objectManager);
-		// alienSpawn.start();
+		 alienSpawn = new Timer(1000 , objectManager);
+		 alienSpawn.start();
 	}
 	public GamePanel() {
 		frameDraw = new Timer(1000/60,this);
@@ -39,7 +39,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		
 	}
 	void updateGameState() {  
-		
+		objectManager.update();
+		if(wizard.isActive!=true) {
+			currentState= END;
+		}
 	}
 	void updateEndState()  {  
 		
@@ -82,8 +85,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-
-		    
 		if (e.getKeyCode()==KeyEvent.VK_ENTER) {
 		    if (currentState == END) {
 		        currentState = MENU;
@@ -98,9 +99,22 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		    if(currentState == GAME) {
 		    	startGame();
 		    }
+		}    
+		if (currentState == GAME) {
+			if (e.getKeyCode() == KeyEvent.VK_UP) {
+				System.out.println("up");
+			}
+			if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+				System.out.println("down");
+			}
+			if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+				System.out.println("right");
+			}
+			if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+				System.out.println("left");
+			}
 		}
-	}    
-
+	}
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
