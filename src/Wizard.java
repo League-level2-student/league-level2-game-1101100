@@ -11,18 +11,7 @@ public class Wizard extends GameObject{
 		super.update();
 		
 	}
-	public void right() {
-	
-	}
-	public void left(){
 
-	}
-	public void up(){
-	
-	}
-	public void down(){
-	
-	}
 	void draw(Graphics g) {
 		g.setColor(Color.RED);
 		g.fillRect(500, 350, width, height);

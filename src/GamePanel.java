@@ -26,9 +26,24 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	Wizard wizard = new Wizard(225, 700, 50, 50);
 	ObjectManager objectManager = new ObjectManager(wizard);
 	Timer alienSpawn;
+	public static BufferedImage up;
+	public static BufferedImage down;
+	public static BufferedImage left;
+	public static BufferedImage right;
+	public static BufferedImage ghost;
 	void startGame() {
 		 alienSpawn = new Timer(2000 , objectManager);
 		 alienSpawn.start();
+		 try {
+		 up = ImageIO.read(this.getClass().getResourceAsStream("up.png"));
+         down = ImageIO.read(this.getClass().getResourceAsStream("down.png"));
+         left = ImageIO.read(this.getClass().getResourceAsStream("left.png"));
+         right = ImageIO.read(this.getClass().getResourceAsStream("right.png"));
+         ghost = ImageIO.read(this.getClass().getResourceAsStream("ghost.png"));
+		 } catch (IOException e) {
+			 
+			e.printStackTrace();
+		 }
 	}
 	public GamePanel() {
 		frameDraw = new Timer(1000/60,this);
@@ -48,12 +63,17 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		
 	}
 	void drawMenuState(Graphics g) {  
-		g.setColor(Color.BLUE);
+		g.setColor(Color.BLUE);	
 		g.fillRect(0, 0, Halloween.width, Halloween.height);
+		g.setColor(Color.WHITE);
+		g.setFont(titleFont);
+		g.drawString("Game lol	", Halloween.width / 28, (int) (Halloween.height * 0.25));
+		g.setFont(normalFont);
+		g.drawString("Press ENTER To Start", Halloween.width / 4, (int) (Halloween.height * 0.625));
 	}
 	void drawGameState(Graphics g) {  
 		
-		g.setColor(Color.BLACK);
+		g.setColor(Color.GRAY);
 		g.fillRect(0, 0, Halloween.width, Halloween.height);
 		objectManager.draw(g);
 		
@@ -102,16 +122,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		}    
 		if (currentState == GAME) {
 			if (e.getKeyCode() == KeyEvent.VK_UP) {
-				System.out.println("up");
+				objectManager.attackAlien(Alien.UP);
 			}
 			if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-				System.out.println("down");
+				objectManager.attackAlien(Alien.DOWN);
 			}
 			if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-				System.out.println("right");
+				objectManager.attackAlien(Alien.RIGHT);
 			}
 			if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-				System.out.println("left");
+				objectManager.attackAlien(Alien.LEFT);
 			}
 		}
 	}

@@ -27,17 +27,22 @@ final static int RIGHT = 3;
 		//TODO NEEDS TO SPAWN FROM BOTH X=0 & X = 500
 		
 		if (reverse) {
-			x -= 1; 
+			x -= 2; 
 			
 		}
 		else {
-			x+=1;
+			x+=2;
+		}
+	}
+	void attacked(int arrowCheck) {
+		if(numberArrows.contains(arrowCheck)) {
+			int location = numberArrows.indexOf(arrowCheck);
+			numberArrows.remove(location);
 		}
 	}
 
 	void draw(Graphics g) {
-		g.setColor(Color.BLUE);
-		g.fillOval(x, y, width, height);
+		g.drawImage(GamePanel.ghost, x, y, width, height, null);
 		
 	}
 

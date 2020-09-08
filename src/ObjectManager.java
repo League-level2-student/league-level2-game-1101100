@@ -25,6 +25,15 @@ public class ObjectManager implements ActionListener {
 		Random random2 = new Random();
 		aliens.add(new Alien(1000, random2.nextInt(700),50,50, true));
 	}
+	void attackAlien(int arrowCheck) {
+		
+		if (aliens.size() > 0) {	
+			aliens.get(0).attacked(arrowCheck);
+			if(aliens.get(0).numberArrows.size() == 0) {
+				aliens.remove(0);
+			}
+		}
+	}
 	void update() {
 		
 		wizard.update();
@@ -60,6 +69,7 @@ public class ObjectManager implements ActionListener {
 		
 			}
 		}
+	
 
 	}
 	@Override
