@@ -1,7 +1,11 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+
+import javax.imageio.ImageIO;
 
 public class Alien extends GameObject{
 
@@ -13,11 +17,26 @@ final static int DOWN = 1;
 final static int LEFT = 2;
 final static int RIGHT = 3;
 final int maxRandomNum = 4; 
+public BufferedImage up;
+public BufferedImage down;
+public BufferedImage left;
+public BufferedImage right;
+public static BufferedImage ghost;
 final static int arrowUnitsAboveGhost = 60;
 int arrows = numArrow.nextInt(maxRandomNum)+1;
 	public Alien(int x, int y, int width, int height, boolean reverse) {
 		super(x, y, width, height);
 		this.reverse = reverse;
+			 try {
+			 up = ImageIO.read(this.getClass().getResourceAsStream("up.png"));
+	         down = ImageIO.read(this.getClass().getResourceAsStream("down.png"));
+	         left = ImageIO.read(this.getClass().getResourceAsStream("left.png"));
+	         right = ImageIO.read(this.getClass().getResourceAsStream("right.png"));
+	         ghost = ImageIO.read(this.getClass().getResourceAsStream("ghost.png"));
+			 } catch (IOException e) {
+				 
+				e.printStackTrace();
+			 }
 		
 		for(int i = 1; i<=arrows; i++ ) {
 			numberArrows.add(numArrow.nextInt(maxRandomNum));
@@ -43,20 +62,20 @@ int arrows = numArrow.nextInt(maxRandomNum)+1;
 	}
 
 	void draw(Graphics g) {
-		g.drawImage(GamePanel.ghost, x, y, width, height, null);
-		for (int i = 1; i < numberArrows.size(); i++) {
+		g.drawImage(ghost, x, y, width, height, null);
+		for (int i = 0; i < numberArrows.size(); i++) {
 			
-			if(arrows == 0) {
-				g.drawImage(GamePanel.up, x, y-arrowUnitsAboveGhost, width, height, null);
+			if(numberArrows.get(i) == UP) {
+				g.drawImage(up, x - (i+10), y-arrowUnitsAboveGhost, width, height, null);
 			}
-			if(arrows == 1) {
-				g.drawImage(GamePanel.down, x, y-arrowUnitsAboveGhost, width, height, null);
+			else if(numberArrows.get(i) == DOWN) {
+				g.drawImage(down, x - 10, y-arrowUnitsAboveGhost, width, height, null);
 			}
-			if(arrows == 2) {
-				g.drawImage(GamePanel.left, x, y-arrowUnitsAboveGhost, width, height, null);
+			else if(numberArrows.get(i) == LEFT) {
+				g.drawImage(left, x , y-arrowUnitsAboveGhost, width, height, null);
 			}
-			if(arrows == 3) {
-				g.drawImage(GamePanel.right, x, y-arrowUnitsAboveGhost, width, height, null);
+			else if(numberArrows.get(i) == RIGHT) {
+				g.drawImage(right, x + 10, y-arrowUnitsAboveGhost, width, height, null);
 			}
 			
 		}

@@ -26,24 +26,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	Wizard wizard = new Wizard(225, 700, 50, 50);
 	ObjectManager objectManager = new ObjectManager(wizard);
 	Timer alienSpawn;
-	public static BufferedImage up;
-	public static BufferedImage down;
-	public static BufferedImage left;
-	public static BufferedImage right;
-	public static BufferedImage ghost;
+
 	void startGame() {
 		 alienSpawn = new Timer(2000 , objectManager);
 		 alienSpawn.start();
-		 try {
-		 up = ImageIO.read(this.getClass().getResourceAsStream("up.png"));
-         down = ImageIO.read(this.getClass().getResourceAsStream("down.png"));
-         left = ImageIO.read(this.getClass().getResourceAsStream("left.png"));
-         right = ImageIO.read(this.getClass().getResourceAsStream("right.png"));
-         ghost = ImageIO.read(this.getClass().getResourceAsStream("ghost.png"));
-		 } catch (IOException e) {
-			 
-			e.printStackTrace();
-		 }
+	
 	}
 	public GamePanel() {
 		frameDraw = new Timer(1000/60,this);
