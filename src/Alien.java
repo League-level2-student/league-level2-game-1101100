@@ -66,16 +66,16 @@ int arrows = numArrow.nextInt(maxRandomNum)+1;
 		for (int i = 0; i < numberArrows.size(); i++) {
 			
 			if(numberArrows.get(i) == UP) {
-				g.drawImage(up, x - (i+10), y-arrowUnitsAboveGhost, width, height, null);
+				g.drawImage(up, x - (i*arrowUnitsAboveGhost), y-arrowUnitsAboveGhost, width, height, null);
 			}
 			else if(numberArrows.get(i) == DOWN) {
-				g.drawImage(down, x - 10, y-arrowUnitsAboveGhost, width, height, null);
+				g.drawImage(down, x - (i*arrowUnitsAboveGhost), y-arrowUnitsAboveGhost, width, height, null);
 			}
 			else if(numberArrows.get(i) == LEFT) {
-				g.drawImage(left, x , y-arrowUnitsAboveGhost, width, height, null);
+				g.drawImage(left, x - (i*arrowUnitsAboveGhost), y-arrowUnitsAboveGhost, width, height, null);
 			}
 			else if(numberArrows.get(i) == RIGHT) {
-				g.drawImage(right, x + 10, y-arrowUnitsAboveGhost, width, height, null);
+				g.drawImage(right, x - (i*arrowUnitsAboveGhost), y-arrowUnitsAboveGhost, width, height, null);
 			}
 			
 		}

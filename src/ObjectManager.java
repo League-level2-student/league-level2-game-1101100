@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,9 +22,9 @@ public class ObjectManager implements ActionListener {
 	void addAlien() {
 		
 		Random random = new Random();
-		aliens.add(new Alien(0, random.nextInt(700),50,50, false));
+		aliens.add(new Alien(0, random.nextInt(500)+100,50,50, false));
 		Random random2 = new Random();
-		aliens.add(new Alien(1000, random2.nextInt(700),50,50, true));
+		aliens.add(new Alien(1000, random2.nextInt(600),50,50, true));
 	}
 	void attackAlien(int arrowCheck) {
 		
@@ -31,6 +32,7 @@ public class ObjectManager implements ActionListener {
 			aliens.get(0).attacked(arrowCheck);
 			if(aliens.get(0).numberArrows.size() == 0) {
 				aliens.remove(0);
+				score++;
 			}
 		}
 	}
@@ -50,6 +52,10 @@ public class ObjectManager implements ActionListener {
 
 		for (int i = 0; i < aliens.size(); i++) {
 			aliens.get(i).draw(g);
+			if(i == 0) {
+				g.setColor(Color.RED);
+				g.fillOval(aliens.get(i).x + 19, aliens.get(i).y + 30, 10, 10);
+			}
 		}
 	}
 	void purgeObjects() {

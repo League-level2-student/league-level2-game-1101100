@@ -23,7 +23,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	int currentState = MENU;
 	Font titleFont;
 	Font normalFont;
-	Wizard wizard = new Wizard(225, 700, 50, 50);
+	Wizard wizard = new Wizard(500, 0, 50, 700);
 	ObjectManager objectManager = new ObjectManager(wizard);
 	Timer alienSpawn;
 
@@ -54,7 +54,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		g.fillRect(0, 0, Halloween.width, Halloween.height);
 		g.setColor(Color.WHITE);
 		g.setFont(titleFont);
-		g.drawString("Game lol	", Halloween.width / 28, (int) (Halloween.height * 0.25));
+		g.drawString("Game", Halloween.width / 28, (int) (Halloween.height * 0.25));
 		g.setFont(normalFont);
 		g.drawString("Press ENTER To Start", Halloween.width / 4, (int) (Halloween.height * 0.625));
 	}
@@ -68,7 +68,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	void drawEndState(Graphics g)  {  
 		g.setColor(Color.RED);
 		g.fillRect(0, 0, Halloween.width, Halloween.height);
-
+		g.setColor(Color.WHITE);
+		g.setFont(titleFont);
+		g.drawString("you are dead", Halloween.width / 28, (int) (Halloween.height * 0.25));
+		g.setFont(normalFont);
+		g.drawString("Press ENTER To restart", Halloween.width / 4, (int) (Halloween.height * 0.625));
+		g.drawString("You killed "+objectManager.getScore()+ " ", 100, 400);
 	}
 
 	
@@ -98,9 +103,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		        alienSpawn.stop();
 		      
 		    } 
-		    if (currentState == MENU){
+		    else if (currentState == MENU){
 		        currentState++;
-		        wizard = new Wizard(250, 700, 50,50);
+		        wizard.isActive = true;
+		        
 		    	objectManager = new ObjectManager(wizard);
 		    }
 		    if(currentState == GAME) {
